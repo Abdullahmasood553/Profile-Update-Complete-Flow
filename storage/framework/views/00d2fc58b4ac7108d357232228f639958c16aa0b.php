@@ -65,6 +65,7 @@
       <?php echo $__env->yieldContent('content'); ?>
         <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <?php echo $__env->yieldContent('javascript'); ?>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\myApp\resources\views/layouts/master.blade.php ENDPATH**/ ?>

@@ -8,7 +8,7 @@
    
     <label for="password" class="sr-only">Password</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-
+    <a href="<?php echo e(route('check_email_page')); ?>">Reset Password</a>
     <button class="btn btn-lg btn-primary btn-block" id="loginBtn" type="submit">Sign in</button>
 
   </form>
@@ -48,8 +48,16 @@
                         $('#notifDiv').fadeOut();
                     }, 3000);
                     window.location = "<?php echo e(route('dashboard')); ?>";
-                  }
-                    } else {
+                  } else if(data.verify_email) {
+                      $('#notifDiv').fadeIn();
+                       $('#notifDiv').css('background', 'red');
+                       $('#notifDiv').text('Verify your account first from email');
+                       setTimeout(() => {
+                        $('#notifDiv').fadeOut();
+                       }, 3000);
+                    }
+                    } 
+                     else {
                        $('#notifDiv').fadeIn();
                        $('#notifDiv').css('background', 'red');
                        $('#notifDiv').text('An error occured. Please try later');

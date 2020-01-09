@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Hash;
 use App\Constants\GlobalConstants;
 use Illuminate\Support\Facades\Storage;
 use URL;
+use Carbon\Carbon;
+use Session;
+use DB;
 
 class AuthController extends Controller
 {
@@ -40,31 +43,49 @@ class AuthController extends Controller
             $user->lname = $request['lname'];
             $user->email = $request['email'];
             $user->password = bcrypt($request['password']);
+         
         }
-        $user->save();
+        if($user->save()) {
+            User::sendVerificationEmail($user);
+        }
         return response()->json(['success' => 'Data Submitted Successfully']);
     }
 
 
+
+
     public function user_login(Request $request) {
-        
-  
-        $validator = Validator::make($request->all(), [
-             'email' => 'required|email',
-             'password' => 'required',
-         ]);
-     
-         if ($validator->passes()) {
-             if (auth()->attempt(array('email' => $request->input('email'),
-               'password' => $request->input('password')),true))
-             {
+   
+        if (Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password')])) {
+            $user = Auth()->user();
+            if ($user->is_active == 1) {
                 return response()->json(['success' => 'Successfully Logged In']);
-             }
-             return response()->json(['error' => ['email' => 'Sorry User not found.']
-            ]);
-         }
-     
-         return response()->json(['error'=> 'Something went wrong']);
+            } else {
+                return response()->json(['verify_email' => 'Please verify your account first through email.']);
+            }
+
+        } else {
+            return response()->json(['error'=> 'Something went wrong']);
+        }
+}
+
+
+    public function verifyAccount(Request $request)
+    {
+        $user = User::where('remember_token', $request['token'])->first();
+        if (isset($user)) {
+            $user->remember_token = null;
+            $user->is_active = true;
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+            Session::put('message', 'You have Successfully Verified');
+            return redirect()->route('login');
+        } else {
+            Session::put('message', 'You have already verified or verification link Expired');
+            return redirect()->route('login');
+        }
     }
 
     public function get_update_profile() {
@@ -131,4 +152,78 @@ class AuthController extends Controller
             return ['status' => false, 'error' => 'Something Went Wrong'];
         }
       }
+
+
+      public function checkEmailPage() {
+        return view('check_reset_email');
+    }
+
+      public function forgotPassword(Request $request)
+      {
+          $validator = Validator::make($request->all(), [
+              'email' => 'required|exists:users,email',
+          ]);
+          //check if input is valid before moving on
+          if ($validator->fails()) {
+              $errors = $validator->getMessageBag()->toArray();
+              return response()->json(array(
+                  'status' => false,
+                  'error' => $validator->errors()->all(),
+              ));
+          }
+  
+          $user = User::where('email', $request->email)->first();
+          if ($user) {
+              $response = User::requestPasswordReset($user->email);
+              if ($response) {
+                  return response()->json(array('status' => true, 'message' => 'Email has been sent...'));
+              }
+          }
+          return response()->json(array('status' => false, 'error' => 'Something Went Wrong'));
+      }  
+
+      public function showResetPasswordPage(Request $request)
+      {
+          $token = $request->token;
+          return view('reset_password')->with('token', $token);
+      }
+
+
+
+      public function resetPassword(Request $request)
+      {
+    
+          $validator = Validator::make($request->all(), [
+              'r_password' => 'required|between:6,255|confirmed',
+              'r_password_confirmation' => 'required '
+          ]);
+  
+          if ($validator->fails()) {
+              return ['status' => false, 'error' => $validator->errors()->all()];
+          }
+          $password = $request->r_password;
+  
+          // Validate the token
+          $tokenData = DB::table('password_resets')->where('token', $request->reset_token)->first();
+          // Redirect the user back to the password reset request form if the token is invalid
+          if (!$tokenData) {
+              return ['status' => false, 'error' => 'Invalid Token'];
+          }
+  
+  
+          $user = User::where('email', $tokenData->email)->first();
+  
+          $user->password = bcrypt($password);
+          if ($user->update()) {
+  
+          }
+          DB::table('password_resets')->where('email', $user->email)->delete();
+  
+           return ['status' => true, 'message' => 'Password Updated'];
+   
+      }
+
+
+
+
 }

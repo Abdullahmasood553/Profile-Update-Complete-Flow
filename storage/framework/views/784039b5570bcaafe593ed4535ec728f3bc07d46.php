@@ -1,8 +1,6 @@
-@extends('layouts.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <form class="form-signin text-center" style="">
-    @csrf
+    <?php echo csrf_field(); ?>
    
     <h1 class="h3 mb-3 font-weight-normal text-center p-4 bg-dark text-white">Login</h1>
     <label for="email" class="sr-only">Email address</label>
@@ -10,15 +8,15 @@
    
     <label for="password" class="sr-only">Password</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    <a href="{{ route('check_email_page') }}">Reset Password</a>
+    <a href="<?php echo e(route('check_email_page')); ?>">Reset Password</a>
     <button class="btn btn-lg btn-dark btn-block" id="loginBtn" type="submit">Sign in</button>
 
   </form>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 <script>
     $(document).ready(function() {
         $("#loginBtn").click(function(e) {
@@ -49,7 +47,7 @@
                     setTimeout(() => {
                         $('#notifDiv').fadeOut();
                     }, 3000);
-                    window.location = "{{ route('dashboard') }}";
+                    window.location = "<?php echo e(route('dashboard')); ?>";
                   } else if(data.verify_email) {
                       $('#notifDiv').fadeIn();
                        $('#notifDiv').css('background', 'red');
@@ -72,6 +70,8 @@
           });  
         }); 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\complete_auth\resources\views/login.blade.php ENDPATH**/ ?>

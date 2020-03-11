@@ -1,8 +1,6 @@
-@extends('layouts.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <form class="form-signin text-center ">
-    @csrf
+    <?php echo csrf_field(); ?>
 
     <h1 class="h3 mb-3 font-weight-normal text-center p-4 bg-dark text-white">Register</h1>
 
@@ -22,12 +20,12 @@
     <button class="btn btn-lg btn-dark btn-block" type="submit" id="save_form">Sign Up</button>
 
 </form>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 <script>
         $(document).ready(function() {
             $('#save_form').on('click', function(e) {
@@ -58,7 +56,7 @@
                 } else if (data.success) {
                     $('#notifDiv').fadeIn();
                     $('#notifDiv').css('background', 'green');
-                    $('#notifDiv').text('User Registered Successfully.');
+                    $('#notifDiv').text('User Register updated.');
                     setTimeout(() => {
                         $('#notifDiv').fadeOut();
                     }, 3000);
@@ -79,8 +77,10 @@
             });
         });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
 
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\complete_auth\resources\views/register.blade.php ENDPATH**/ ?>

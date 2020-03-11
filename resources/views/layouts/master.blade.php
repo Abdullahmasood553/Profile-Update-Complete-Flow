@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>MyApp | Abnation</title>
     <link rel="stylesheet" href="{{ asset('public/assets/css/login.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">

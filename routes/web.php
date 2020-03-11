@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/login', 'AuthController@login')->name('login');
-Route::post('/user_login', 'AuthController@user_login');
+    Route::get('/login', 'AuthController@login')->name('login');
+    Route::post('/user_login', 'AuthController@user_login');
 
-Route::get('/register', 'AuthController@register');
-Route::get('verify_account', 'AuthController@verifyAccount');
-Route::post('/save_register', 'AuthController@save_register')->name('save_user');
+    Route::get('/register', 'AuthController@register');
+    Route::get('verify_account', 'AuthController@verifyAccount');
+    Route::post('/save_register', 'AuthController@save_register')->name('save_user');
 
 
     // Reset Password
@@ -37,10 +37,6 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::get('/logout', 'AuthController@logout')->name('logout');    
 });
 
-
-
-Route::get('find_profile', 'ProfileController@find_profile');
-Route::get('filter_profile', 'ProfileController@filter_profile')->name('search.profile');
 
 
 

@@ -1,5 +1,4 @@
-@extends('layouts.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
   <section class=form-login>
     <div class="container">
@@ -11,9 +10,9 @@
                     </div>
                     <div class="card-body">
                         <form id="reset_passsword_form">
-                            @csrf
+                            <?php echo csrf_field(); ?>
                             <input name="reset_token" type="hidden"
-                            value="{{app('request')->input('token')}}">
+                            value="<?php echo e(app('request')->input('token')); ?>">
 
                            
                             
@@ -44,11 +43,11 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 
 
 <script>
@@ -72,7 +71,7 @@
                         console.log(data);
                         $.ajax({
                             type: 'POST',
-                            url: "{{route('user_reset_password')}}",
+                            url: "<?php echo e(route('user_reset_password')); ?>",
                             data: data,
                             success: function (data) {
                                 if (data.status) {
@@ -82,7 +81,7 @@
                                 setTimeout(() => {
                                     $('#notifDiv').fadeOut();
                                 }, 3000);
-                                window.location = "{{ route('login') }}";
+                                window.location = "<?php echo e(route('login')); ?>";
                                 } else {
                                 $('#notifDiv').fadeIn();
                                 $('#notifDiv').css('background', 'red');
@@ -102,6 +101,8 @@
         });
      
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\complete_auth\resources\views/reset_password.blade.php ENDPATH**/ ?>

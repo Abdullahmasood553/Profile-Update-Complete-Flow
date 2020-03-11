@@ -1,5 +1,4 @@
-@extends('layouts.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
   <section class=form-login>
     <div class="container">
@@ -11,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <form >
-                            @csrf
+                            <?php echo csrf_field(); ?>
  
                             <?php if (Session::has('success')) { ?>
                             <div class="alert alert-success">
@@ -46,7 +45,7 @@
                                 <input type="email" name="email" id="forgot_password_email" class="form-control">
                             </div>
 
-                          <a href="{{ route('check_email_page') }}" class="nav-link text-dark">Reset Password</a>
+                          <a href="<?php echo e(route('check_email_page')); ?>" class="nav-link text-dark">Reset Password</a>
                           <button type="submit" class="btn btn-dark btn-block" id="bt_forgot_password">Reset Password</button>
                         </form>
                     </div>
@@ -58,19 +57,19 @@
 
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 <script>
     $('#bt_forgot_password').click(function (event) {
             event.preventDefault();
             var email = $('#forgot_password_email').val();
             $.ajax({
-                url: "{{route('user.forgot.password')}}",
+                url: "<?php echo e(route('user.forgot.password')); ?>",
                 data: {
-                    '_token': "{{csrf_token()}}",
+                    '_token': "<?php echo e(csrf_token()); ?>",
                     email: email,
                 },
                 type: "POST",
@@ -99,6 +98,8 @@
         });
      
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\complete_auth\resources\views/check_reset_email.blade.php ENDPATH**/ ?>

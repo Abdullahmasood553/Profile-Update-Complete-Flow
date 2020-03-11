@@ -11,6 +11,12 @@
 |
 */
 
+    Route::get('admin/login', 'AdminController@login')->name('admin.login');
+    Route::post('admin/admin_login', 'AdminController@postLogin');
+    Route::get('admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+    Route::get('admin/logout', 'AdminController@logout')->name('admin.logout');
+    
+
     Route::get('/login', 'AuthController@login')->name('login');
     Route::post('/user_login', 'AuthController@user_login');
 
@@ -35,8 +41,9 @@ Route::group(['middleware' => 'auth.user'], function () {
     Route::post('delete_profile_picture', 'AuthController@deleteProfilePicture')->name('delete.profile.picture');
     Route::post('/UpdatePassword', 'AuthController@UpdatePassword');
     Route::get('/logout', 'AuthController@logout')->name('logout');    
+
+      // Save Business Listings
+      Route::post('save_business', 'AuthController@save_business');
+
 });
-
-
-
 

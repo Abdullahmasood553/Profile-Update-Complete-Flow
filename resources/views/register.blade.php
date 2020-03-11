@@ -1,28 +1,49 @@
 @extends('layouts.master')
 
 @section('content')
-<form class="form-signin text-center ">
-    @csrf
 
-    <h1 class="h3 mb-3 font-weight-normal text-center p-4 bg-dark text-white">Register</h1>
-
-    <label for="fname" class="sr-only">First Name</label>
-    <input type="text" id="fname" name="fname" class="form-control" placeholder="First Name" required autofocus>
-    <br>
-    <label for="lname" class="sr-only">Last Name</label>
-    <input type="text" id="lname" name="lname" class="form-control" placeholder="Last Name" required autofocus>
-    <br>
-    <label for="email" class="sr-only">Email address</label>
-    <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
-
-    <br>
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password">
-
-    <button class="btn btn-lg btn-dark btn-block" type="submit" id="save_form">Sign Up</button>
-
-</form>
+    <section class=form-login>
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-6 mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-dark text-white">
+                              <h4 class="text-center">Account Register</h4>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                @csrf
+                                <div class="form-group">
+                                    <label for="fname">First Name</label>
+                                    <input type="text" name="fname" id="fname" class="form-control" placeholder="Enter First Name">
+                                </div>
+    
+                                <div class="form-group">
+                                    <label for="fname">Last Name</label>
+                                    <input type="text" name="fname" id="lname" class="form-control" placeholder="Enter Last Name">
+                                </div>
+    
+    
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email">
+                                </div>
+    
+                                <div class="form-group">
+                                  <label for="password">Password</label>
+                                  <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password">
+                              </div>
+    
+                              <button type="submit" class="btn btn-dark btn-block" id="save_form">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
+
 
 
 

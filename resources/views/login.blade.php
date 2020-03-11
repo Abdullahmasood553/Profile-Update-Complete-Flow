@@ -1,19 +1,35 @@
 @extends('layouts.master')
 
 @section('content')
-<form class="form-signin text-center" style="">
-    @csrf
-   
-    <h1 class="h3 mb-3 font-weight-normal text-center p-4 bg-dark text-white">Login</h1>
-    <label for="email" class="sr-only">Email address</label>
-    <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
-   
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
-    <a href="{{ route('check_email_page') }}">Reset Password</a>
-    <button class="btn btn-lg btn-dark btn-block" id="loginBtn" type="submit">Sign in</button>
 
-  </form>
+  <section class=form-login>
+      <div class="container">
+          <div class="row ">
+              <div class="col-md-6 mx-auto">
+                  <div class="card">
+                      <div class="card-header bg-dark text-white">
+                            <h4 class="text-center">Account Login</h4>
+                      </div>
+                      <div class="card-body">
+                          <form >
+                              <div class="form-group">
+                                  <label for="email">Email</label>
+                                  <input type="email" name="email" id="email" class="form-control">
+                              </div>
+
+                              <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" class="form-control">
+                            </div>
+                            <a href="{{ route('check_email_page') }}" class="nav-link text-dark">Reset Password</a>
+                            <button type="submit" class="btn btn-dark btn-block" id="loginBtn">LOGIN</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
 @endsection
 
 

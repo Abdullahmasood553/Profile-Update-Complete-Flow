@@ -94,13 +94,5 @@ class User extends Authenticatable
         return false;
     }
 
-    public static function searchProfile($country) {
 
-      $profile = DB::table('users')->get();
-        if($country && $country != GlobalConstants::ALL) {
-            $profile = $profile->where('users.country', $country);
-            dd($profile);   
-        }
-        return $profile;
-    }
 }

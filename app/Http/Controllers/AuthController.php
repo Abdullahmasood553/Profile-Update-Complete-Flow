@@ -51,7 +51,7 @@ class AuthController extends Controller
         if($user->save()) {
             User::sendVerificationEmail($user);
         }
-        // $user->save();
+     //   $user->save();
         return response()->json(['success' => 'User Registered Successfully']);
     }
 

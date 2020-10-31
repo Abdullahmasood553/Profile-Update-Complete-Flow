@@ -47,7 +47,7 @@
     <label for="password" class="sr-only">Current Password</label>
     <input type="password" id="password" name="password" class="form-control" value="123456" placeholder="Password">
     <br>
-    <a class="btn btn-primary collapsed" data-toggle="collapse" href="#collapseExample" role="button"
+    <a class="btn btn-dark btn-sm collapsed" data-toggle="collapse" href="#collapseExample" role="button"
         aria-expanded="false" aria-controls="collapseExample">Change Password
     </a>
 
@@ -83,9 +83,9 @@
                         </div>
                     </div>
                     <div class="col-md-12 PT-10">
-                        <button type="button" id="updatePasswordBtn" class="btn btn-primary mr-2 mb-0">Change
+                        <button type="button" id="updatePasswordBtn" class="btn btn-dark mr-2 mb-0">Change
                             Password</button>
-                        <button class="btn btn-primary btn-pre mb-0 cancelPwChange" type="button" data-toggle="collapse"
+                        <button class="btn btn-dark btn-pre mb-0 cancelPwChange" type="button" data-toggle="collapse"
                             data-target="#collapseExample" aria-expanded="false"
                             aria-controls="collapseExample">Cancel</button>
 
@@ -95,7 +95,7 @@
         </div>
     </div>
     <br><br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" id="saveProfile">Save</button>
+    <button class="btn btn-sm btn-dark " type="submit" id="saveProfile">Save</button>
 
 </form>
 </div>

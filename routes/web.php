@@ -35,7 +35,7 @@
 
 Route::group(['middleware' => 'auth.user'], function () {
 
-    Route::get('/dashboard', 'AuthController@dashboard')->name('dashboard');
+    Route::get('/', 'AuthController@dashboard')->name('dashboard');
     Route::get('/profile', 'AuthController@get_update_profile')->name('profile');
     Route::post('/save_profile', 'AuthController@save_profile');
     Route::post('delete_profile_picture', 'AuthController@deleteProfilePicture')->name('delete.profile.picture');

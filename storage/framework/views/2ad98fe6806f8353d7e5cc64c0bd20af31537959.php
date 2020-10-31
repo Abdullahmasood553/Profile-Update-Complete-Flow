@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><span style="color:red"><?php echo e(Auth::user()->fname); ?></span></a>
+    <a class="navbar-brand" href="#"><span><?php echo e(Auth::user()->fname); ?></span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,7 +28,7 @@
 
             <?php if((Auth::check())): ?>
             <li>
-                <img src="<?php echo e(asset('public/storage/'.Auth()->user()->profile_pic)); ?>" height="40px" 
+                <img src="<?php echo e(asset('storage/'.Auth()->user()->profile_pic)); ?>" height="40px" 
           width="40px" style="border-radius: 50%" alt="" class="pull-right img-circle login" />
             </li>
             <?php endif; ?>

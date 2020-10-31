@@ -1,19 +1,17 @@
-@extends('layouts.master')
-
-@section('content')
-@include('layouts.inc.nav')
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('layouts.inc.nav', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <div class="container">
     <form  class="form-signin text-center"
             id="updateProfileForm"
              method="POST"
             enctype="multipart/form-data">
-    @csrf
+    <?php echo csrf_field(); ?>
 
 
     <div class="photo-row">
         <div class="photo-img" id="image_user"
-            style="background-image:url('{{ asset('public/storage/'.Auth()->user()->profile_pic) }}');">
+            style="background-image:url('<?php echo e(asset('public/storage/'.Auth()->user()->profile_pic)); ?>');">
         </div>
 
         <div class="profile-content">
@@ -30,20 +28,20 @@
         </div>
     </div>
 
-    <input hidden value="{{Auth::user()->id}}" name="user_id" />
+    <input hidden value="<?php echo e(Auth::user()->id); ?>" name="user_id" />
     <h1 class="h3 mb-3 font-weight-normal">Update Profile</h1>
 
     <label for="fname" class="sr-only">First Name</label>
     <input type="text" id="fname" name="fname" class="form-control required_profile" placeholder="First Name"
-        value="{{ Auth::user()->fname }}" required autofocus>
+        value="<?php echo e(Auth::user()->fname); ?>" required autofocus>
     <br>
     <label for="lname" class="sr-only">Last Name</label>
     <input type="text" id="lname" name="lname" class="form-control required_profile" placeholder="Last Name"
-        value="{{ Auth::user()->lname }}" required autofocus>
+        value="<?php echo e(Auth::user()->lname); ?>" required autofocus>
     <br>
     <label for="email" class="sr-only">Email address</label>
     <input type="email" id="email" name="email" class="form-control required_profile" placeholder="Email address"
-        value="{{ Auth::user()->email }}" required autofocus>
+        value="<?php echo e(Auth::user()->email); ?>" required autofocus>
 
     <br>
     <label for="password" class="sr-only">Current Password</label>
@@ -102,10 +100,10 @@
 </form>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
 <script>
     $(document).ready(function () {
 
@@ -290,7 +288,7 @@
 
     function doOnDeleteImageClick() {
             deleteUserImage();
-            let url = '{{asset('public/assets/images/default.png')}}';
+            let url = '<?php echo e(asset('public/assets/images/default.png')); ?>';
             $('#image_user').css('background-image', 'url(' + url + ')');
         }
 
@@ -299,13 +297,15 @@
             $.ajax({
                 type: 'POST',
                 data: {
-                    '_token': '{{csrf_token()}}'
+                    '_token': '<?php echo e(csrf_token()); ?>'
                 },
-                url: '{{route('delete.profile.picture')}}',
+                url: '<?php echo e(route('delete.profile.picture')); ?>',
                 success: function (response) {
                 }.bind($(this))
             });
         }
 
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\xampp\htdocs\Profile-Update-Complete-Flow\resources\views/update_profile.blade.php ENDPATH**/ ?>
